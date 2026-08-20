@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ONE CITY: SURVIVAL</title>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <!-- 3D canvas sits behind everything -->
+  <canvas id="game-canvas"></canvas>
+
+  <!-- TITLE SCREEN -->
+  <div id="screen-title" class="screen">
+    <div class="title-wrap">
+      <h1 class="game-title">ONE CITY<span class="accent">:</span> SURVIVAL</h1>
+      <p class="subtitle">SURVIVE THE CITY.</p>
+      <div class="menu-buttons">
+        <button id="btn-play" class="btn btn-primary">PLAY</button>
+        <button id="btn-howto" class="btn btn-secondary">HOW TO PLAY</button>
+      </div>
+    </div>
+    <div class="version-tag">stage 1 prototype</div>
+  </div>
+
+  <!-- HOW TO PLAY -->
+  <div id="screen-howto" class="screen hidden">
+    <div class="panel">
+      <h2>HOW TO PLAY</h2>
+      <ul class="howto-list">
+        <li><strong>WASD</strong> — move</li>
+        <li><strong>MOUSE</strong> — look around</li>
+        <li><strong>SPACE</strong> — jump</li>
+        <li><strong>SHIFT</strong> — sprint</li>
+        <li><strong>C</strong> — crouch</li>
+        <li><strong>ESC</strong> — release mouse / pause</li>
+      </ul>
+      <p class="howto-note">Explore the city with other players. More systems (events, health, elimination) arrive in later stages.</p>
+      <button id="btn-howto-back" class="btn btn-secondary">BACK</button>
+    </div>
+  </div>
+
+  <!-- CONNECTING / WAITING OVERLAY -->
+  <div id="screen-status" class="screen hidden">
+    <div class="status-wrap">
+      <div class="spinner"></div>
+      <p id="status-text" class="status-text">CONNECTING...</p>
+    </div>
+  </div>
+
+  <!-- IN-GAME HUD -->
+  <div id="hud" class="hidden">
+    <div class="hud-top-left">
+      <div class="hud-row">ONLINE: <span id="hud-player-count">0</span></div>
+    </div>
+    <div class="hud-crosshair">+</div>
+    <div class="hud-hint" id="hud-hint">Click to lock mouse and move</div>
+  </div>
+
+  <!-- DEBUG PANEL (toggle with F3) -->
+  <div id="debug-panel" class="hidden">
+    <div>FPS: <span id="dbg-fps">-</span></div>
+    <div>PING: <span id="dbg-ping">-</span> ms</div>
+    <div>PLAYERS: <span id="dbg-players">-</span></div>
+    <div>TICK: <span id="dbg-tick">20</span> Hz</div>
+    <div>POS: <span id="dbg-pos">-</span></div>
+    <div>CONN: <span id="dbg-conn">-</span></div>
+  </div>
+
+  <!-- socket.io client is auto-served by the socket.io server at this path -->
+  <script src="/socket.io/socket.io.js"></script>
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+        "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+      }
+    }
+  </script>
+  <script type="module" src="/js/main.js"></script>
+</body>
+</html>

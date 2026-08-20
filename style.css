@@ -1,0 +1,223 @@
+:root {
+  --bg: #0a0c10;
+  --panel: #12151bcc;
+  --accent: #ff3b3b;
+  --accent-2: #40c4ff;
+  --text: #e8ecf1;
+  --text-dim: #9aa4b2;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  overflow: hidden;
+}
+
+#game-canvas {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.hidden { display: none !important; }
+
+.screen {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background: radial-gradient(ellipse at center, rgba(10,12,16,0.55) 0%, rgba(6,7,10,0.92) 75%);
+  z-index: 10;
+  animation: fadeIn 0.35s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.title-wrap { text-align: center; }
+
+.game-title {
+  font-size: clamp(2.5rem, 7vw, 5rem);
+  letter-spacing: 0.05em;
+  margin: 0;
+  font-weight: 800;
+  text-shadow: 0 0 24px rgba(255,59,59,0.35), 0 4px 12px rgba(0,0,0,0.6);
+}
+
+.game-title .accent { color: var(--accent); }
+
+.subtitle {
+  margin-top: 0.5rem;
+  letter-spacing: 0.35em;
+  font-size: 0.95rem;
+  color: var(--text-dim);
+}
+
+.menu-buttons {
+  margin-top: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  align-items: center;
+}
+
+.btn {
+  min-width: 220px;
+  padding: 0.85rem 1.5rem;
+  font-size: 1rem;
+  letter-spacing: 0.12em;
+  font-weight: 700;
+  border-radius: 4px;
+  border: 1px solid rgba(255,255,255,0.12);
+  cursor: pointer;
+  transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.12s ease;
+}
+
+.btn:hover { transform: translateY(-2px); }
+
+.btn-primary {
+  background: linear-gradient(180deg, #ff4b4b, #c81f1f);
+  color: #fff;
+  box-shadow: 0 6px 18px rgba(255,59,59,0.35);
+}
+.btn-primary:hover { box-shadow: 0 8px 22px rgba(255,59,59,0.5); }
+
+.btn-secondary {
+  background: rgba(255,255,255,0.06);
+  color: var(--text);
+}
+.btn-secondary:hover { background: rgba(255,255,255,0.12); }
+
+.version-tag {
+  position: absolute;
+  bottom: 1rem;
+  right: 1.25rem;
+  color: var(--text-dim);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+}
+
+.panel {
+  background: var(--panel);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 8px;
+  padding: 2rem 2.5rem;
+  max-width: 480px;
+  backdrop-filter: blur(6px);
+}
+
+.panel h2 {
+  margin-top: 0;
+  letter-spacing: 0.08em;
+}
+
+.howto-list {
+  list-style: none;
+  padding: 0;
+  line-height: 2;
+  color: var(--text-dim);
+}
+.howto-list strong { color: var(--accent-2); letter-spacing: 0.05em; }
+
+.howto-note {
+  color: var(--text-dim);
+  font-size: 0.85rem;
+  margin: 1.25rem 0 1.5rem;
+}
+
+.status-wrap { text-align: center; }
+
+.status-text {
+  margin-top: 1.25rem;
+  letter-spacing: 0.2em;
+  color: var(--text-dim);
+  font-size: 1rem;
+}
+
+.spinner {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: 3px solid rgba(255,255,255,0.15);
+  border-top-color: var(--accent);
+  margin: 0 auto;
+  animation: spin 0.9s linear infinite;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+#hud {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 5;
+  font-variant-numeric: tabular-nums;
+}
+
+.hud-top-left {
+  position: absolute;
+  top: 1rem;
+  left: 1.1rem;
+  background: rgba(10,12,16,0.55);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 6px;
+  padding: 0.5rem 0.85rem;
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+}
+
+.hud-row { color: var(--text); }
+.hud-row span { color: var(--accent-2); font-weight: 700; }
+
+.hud-crosshair {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: rgba(255,255,255,0.75);
+  font-size: 1.1rem;
+}
+
+.hud-hint {
+  position: absolute;
+  bottom: 1.25rem;
+  left: 50%;
+  transform: translateX(-50%);
+  color: var(--text-dim);
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  background: rgba(10,12,16,0.5);
+  padding: 0.35rem 0.75rem;
+  border-radius: 4px;
+}
+
+#debug-panel {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  background: rgba(0,0,0,0.65);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 6px;
+  padding: 0.6rem 0.8rem;
+  font-family: "Consolas", "Courier New", monospace;
+  font-size: 0.75rem;
+  color: #7CFC7C;
+  line-height: 1.5;
+  z-index: 20;
+  min-width: 150px;
+}
+
+/* name tag sprite fallback styling not needed — drawn on canvas texture */
